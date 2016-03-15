@@ -16,12 +16,7 @@
 'use strict';
 
 var chalk = require('chalk');
-var config = {
-	"database": "mongodb://heroku_24phvj3q:7ssslcprnll7klpde1r83p7fk8@ds015939.mlab.com:15939/heroku_24phvj3q",
-	"host": "0.0.0.0",
-	"port": process.env.$PORT,
-	"cron": "0 30 0 * * *"
-};
+var config = {};
 
 require('./app')(config, function (err, app) {
 	console.log('');
