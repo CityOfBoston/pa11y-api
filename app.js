@@ -27,7 +27,7 @@ function initApp (config, callback) {
 	var config = {
 		database: "mongodb://heroku_24phvj3q:7ssslcprnll7klpde1r83p7fk8@ds015939.mlab.com:15939/heroku_24phvj3q",
 		host: "0.0.0.0",
-		port: process.env.$PORT,
+		port: process.env.PORT * 1,
 		cron: "0 30 0 * * *"
 	}
 
