@@ -31,6 +31,7 @@
     "mongodb": "~2.0",
     "pa11y": "~3.0",
     "phantomjs-prebuilt": "^2.1.5",
+    "raygun": "^0.8.5",
     "underscore": "~1.8"
   },
   "devDependencies": {
@@ -43,7 +44,6 @@
   },
   "main": "./app.js",
   "scripts": {
-    "postuninstall": "node createJSON.js",
     "start": "node .",
     "test": "grunt"
   }

@@ -1,15 +1,15 @@
 // This file is part of pa11y-webservice.
-// 
+//
 // pa11y-webservice is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // pa11y-webservice is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with pa11y-webservice.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -17,6 +17,8 @@
 
 var async = require('async');
 var Hapi = require('hapi');
+var raygun = require('raygun');
+var raygunClient = new raygun.Client().init({ apiKey: process.env.RAYGUN_APIKEY });
 var MongoClient = require('mongodb').MongoClient;
 
 module.exports = initApp;
@@ -35,6 +37,7 @@ function initApp (config, callback) {
 		function (next) {
 			MongoClient.connect(config.database, {server: {auto_reconnect: false}}, function (err, db) {
 				app.db = db;
+				raygunClient.send(err);
 				next(err);
 			});
 		},
@@ -42,6 +45,7 @@ function initApp (config, callback) {
 		function (next) {
 			require('./model/result')(app, function (err, model) {
 				app.model.result = model;
+				raygunClient.send(err);
 				next(err);
 			});
 		},
@@ -49,6 +53,7 @@ function initApp (config, callback) {
 		function (next) {
 			require('./model/task')(app, function (err, model) {
 				app.model.task = model;
+				raygunClient.send(err);
 				next(err);
 			});
 		},
@@ -65,12 +70,14 @@ function initApp (config, callback) {
 				app.server.addRoutes(require('./route/tasks')(app));
 				app.server.addRoutes(require('./route/task')(app));
 				app.server.start(next);
+				app.use(raygunClient.expressHandler);
 			} else {
 				next();
 			}
 		}
 
 	], function (err) {
+		raygunClient.send(err);
 		callback(err, app);
 	});
 
