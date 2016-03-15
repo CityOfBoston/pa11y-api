@@ -17,8 +17,6 @@
 
 var async = require('async');
 var Hapi = require('hapi');
-var raygun = require('raygun');
-var raygunClient = new raygun.Client().init({ apiKey: process.env.RAYGUN_APIKEY });
 var MongoClient = require('mongodb').MongoClient;
 
 module.exports = initApp;
@@ -37,7 +35,6 @@ function initApp (config, callback) {
 		function (next) {
 			MongoClient.connect(config.database, {server: {auto_reconnect: false}}, function (err, db) {
 				app.db = db;
-				raygunClient.send(err);
 				next(err);
 			});
 		},
@@ -45,7 +42,6 @@ function initApp (config, callback) {
 		function (next) {
 			require('./model/result')(app, function (err, model) {
 				app.model.result = model;
-				raygunClient.send(err);
 				next(err);
 			});
 		},
@@ -53,7 +49,6 @@ function initApp (config, callback) {
 		function (next) {
 			require('./model/task')(app, function (err, model) {
 				app.model.task = model;
-				raygunClient.send(err);
 				next(err);
 			});
 		},
@@ -70,14 +65,12 @@ function initApp (config, callback) {
 				app.server.addRoutes(require('./route/tasks')(app));
 				app.server.addRoutes(require('./route/task')(app));
 				app.server.start(next);
-				app.use(raygunClient.expressHandler);
 			} else {
 				next();
 			}
 		}
 
 	], function (err) {
-		raygunClient.send(err);
 		callback(err, app);
 	});
 
