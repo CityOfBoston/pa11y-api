@@ -43,7 +43,7 @@
   },
   "main": "./app.js",
   "scripts": {
-    "prestart": "node createJSON.js",
+    "postuninstall": "node createJSON.js",
     "start": "node .",
     "test": "grunt"
   }
