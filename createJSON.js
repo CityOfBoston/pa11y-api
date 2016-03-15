@@ -9,5 +9,5 @@ var obj = {
 }
 
 jsonfile.writeFile(file, obj, function (err) {
-  console.error(err)
+  console.log(file)
 })
