@@ -1,48 +1,50 @@
 {
-	"name": "pa11y-webservice",
-	"version": "1.6.4",
-
-	"engines": {
-		"node": ">=0.12"
-	},
-
-	"description": "pa11y-webservice provides scheduled accessibility reports for multiple URLs",
-	"keywords": [ "accessibility", "analysis", "report", "web-service" ],
-
-	"author": "Nature Publishing Group",
-	"contributors": [
-		"Rowan Manning (http://rowanmanning.com/)"
-	],
-
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/springernature/pa11y-webservice.git"
-	},
-	"homepage": "https://github.com/springernature/pa11y-webservice",
-	"bugs": "https://github.com/springernature/pa11y-webservice/issues",
-
-	"dependencies": {
-		"async": "~1.4",
-		"chalk": "~1.1",
-		"cron": "~1.0",
-		"freeport": "~1.0",
-		"hapi": "~1.9",
-		"mongodb": "~2.0",
-		"pa11y": "~3.0",
-		"underscore": "~1.8"
-	},
-	"devDependencies": {
-		"grunt": "~0.4",
-		"grunt-contrib-jshint": "~0.7",
-		"grunt-mocha-test": "~0.7",
-		"grunt-nodemon": "~0.1",
-		"proclaim": "~3.3",
-		"request": "~2.61"
-	},
-
-	"main": "./app.js",
-	"scripts": {
-		"start": "node .",
-		"test": "grunt"
-	}
+  "name": "pa11y-webservice",
+  "version": "1.6.4",
+  "engines": {
+    "node": ">=0.12"
+  },
+  "description": "pa11y-webservice provides scheduled accessibility reports for multiple URLs",
+  "keywords": [
+    "accessibility",
+    "analysis",
+    "report",
+    "web-service"
+  ],
+  "author": "Nature Publishing Group",
+  "contributors": [
+    "Rowan Manning (http://rowanmanning.com/)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/springernature/pa11y-webservice.git"
+  },
+  "homepage": "https://github.com/springernature/pa11y-webservice",
+  "bugs": "https://github.com/springernature/pa11y-webservice/issues",
+  "dependencies": {
+    "async": "~1.4",
+    "chalk": "~1.1",
+    "cron": "~1.0",
+    "freeport": "~1.0",
+    "hapi": "~1.9",
+    "jsonfile": "^2.2.3",
+    "mongodb": "~2.0",
+    "pa11y": "~3.0",
+    "phantomjs-prebuilt": "^2.1.5",
+    "underscore": "~1.8"
+  },
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-contrib-jshint": "~0.7",
+    "grunt-mocha-test": "~0.7",
+    "grunt-nodemon": "~0.1",
+    "proclaim": "~3.3",
+    "request": "~2.61"
+  },
+  "main": "./app.js",
+  "scripts": {
+    "prestart": "node createJSON.js",
+    "start": "node .",
+    "test": "grunt"
+  }
 }
