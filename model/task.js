@@ -144,7 +144,7 @@ module.exports = function (app, callback) {
 						timeout: (task.timeout || 30000),
 						ignore: task.ignore,
 						phantom: {
-							"SslProtocol": "any"
+							"ignoreSslErrors": true
 						},
 						log: {
 							debug: pa11yLog,
