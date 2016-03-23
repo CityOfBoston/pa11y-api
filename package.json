@@ -30,7 +30,7 @@
     "jsonfile": "^2.2.3",
     "mongodb": "~2.0",
     "pa11y": "~3.0",
-    "phantomjs-prebuilt": "^2.1.5",
+    "phantomjs-prebuilt": "*",
     "raygun": "^0.8.5",
     "underscore": "~1.8"
   },

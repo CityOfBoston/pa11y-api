@@ -31,8 +31,7 @@ function initApp (config, callback) {
 		cron: "0 30 0 * * *",
 		phantom: {
       parameters: {
-        'ignore-ssl-errors': 'false',
-        'ssl-protocol': 'any'
+        "ignoreSslErrors": true,
       }
     }
 	}
