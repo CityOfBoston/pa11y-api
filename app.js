@@ -32,6 +32,7 @@ function initApp (config, callback) {
 		phantom: {
       parameters: {
         "ignoreSslErrors": true,
+				"remote-debugger-port": 9011
       }
     }
 	}
