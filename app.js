@@ -28,7 +28,13 @@ function initApp (config, callback) {
 		database: process.env.MONGOLAB_URI,
 		host: "0.0.0.0",
 		port: process.env.PORT * 1,
-		cron: "0 30 0 * * *"
+		cron: "0 30 0 * * *",
+		phantom: {
+      parameters: {
+        'ignore-ssl-errors': 'false',
+        'ssl-protocol': 'any'
+      }
+    }
 	}
 
 	var app = module.exports = {
